@@ -90,7 +90,7 @@
 - [ ] LINEARREG_INTERCEPT	Linear Regression Intercept
 - [ ] LINEARREG_SLOPE	Linear Regression Slope
 - [x] MA	All Moving Average
-- [ ] MACD	Moving Average Convergence/Divergence
+- [x] MACD	Moving Average Convergence/Divergence
 - [ ] MACDEXT	MACD with controllable MA type
 - [ ] MACDFIX	Moving Average Convergence/Divergence Fix 12/26
 - [ ] MAMA	MESA Adaptive Moving Average

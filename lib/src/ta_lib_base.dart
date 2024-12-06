@@ -22,6 +22,8 @@ class TaLib {
     _nativeBindings = NativeLibrary(dylib);
     _nativeBindings.TA_Initialize();
   }
+
+  /// All Moving Average
   List<double> ma(
     int startIdx,
     int endIdx,
@@ -51,6 +53,49 @@ class TaLib {
       }
       return outReal.asTypedList(outNBElement.value).toList();
     }, malloc);
+  }
+
+  ({List<double> macd, List<double> macdSignal, List<double> macdHist}) macd(
+    int startIdx,
+    int endIdx,
+    List<double> real, {
+    int? fastPeriod,
+    int? slowPeriod,
+    int? signalPeriod,
+  }) {
+    return using((arena) {
+      final inReal = arena<Double>(real.length);
+      for (var i = 0; i < real.length; i++) {
+        inReal[i] = real[i];
+      }
+      final outBegIdx = arena<Int32>(1);
+      final outNBElement = arena<Int32>(1);
+      final outMACD = arena<Double>(endIdx - startIdx + 1);
+      final outMACDSignal = arena<Double>(endIdx - startIdx + 1);
+      final outMACDHist = arena<Double>(endIdx - startIdx + 1);
+      final retCode = _nativeBindings.TA_MACD(
+        startIdx,
+        endIdx,
+        inReal,
+        fastPeriod ?? TA_INTEGER_DEFAULT,
+        slowPeriod ?? TA_INTEGER_DEFAULT,
+        signalPeriod ?? TA_INTEGER_DEFAULT,
+        outBegIdx,
+        outNBElement,
+        outMACD,
+        outMACDSignal,
+        outMACDHist,
+      );
+      if (retCode != TA_RetCode.TA_SUCCESS) {
+        throw TaLibException(retCode);
+      }
+      print(outNBElement.value);
+      return (
+        macd: outMACD.asTypedList(outNBElement.value).toList(),
+        macdSignal: outMACDSignal.asTypedList(outNBElement.value).toList(),
+        macdHist: outMACDHist.asTypedList(outNBElement.value).toList(),
+      );
+    });
   }
 }
 
@@ -83,4 +128,9 @@ extension on MaType {
 class TaLibException implements Exception {
   final TA_RetCode code;
   TaLibException(this.code);
+
+  @override
+  String toString() {
+    return 'TaLibException: $code';
+  }
 }
