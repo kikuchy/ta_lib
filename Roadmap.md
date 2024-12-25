@@ -127,7 +127,7 @@
 - [ ] SUM	Summation
 - [ ] T3	Triple Exponential Moving Average (T3)
 - [ ] TEMA	Triple Exponential Moving Average
-- [ ] TRANGE	True Range
+- [x] TRANGE	True Range
 - [ ] TRIMA	Triangular Moving Average
 - [ ] TRIX	1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
 - [ ] TSF	Time Series Forecast
