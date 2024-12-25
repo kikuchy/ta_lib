@@ -30,8 +30,6 @@ class TaLib {
 
   /// Average True Range
   List<double> atr(
-    int startIdx,
-    int endIdx,
     List<double> high,
     List<double> low,
     List<double> close, {
@@ -53,6 +51,8 @@ class TaLib {
         inClose[i] = close[i];
       }
 
+      final startIdx = 0;
+      final endIdx = close.length - 1;
       final outBegIdx = arena<Int32>(1);
       final outNBElement = arena<Int32>(1);
       final outReal = arena<Double>(endIdx - startIdx + 1);
@@ -77,8 +77,6 @@ class TaLib {
   // Bollinger Bands
   ({List<double> upperBand, List<double> middleBand, List<double> lowerBand})
       bbands(
-    int startIdx,
-    int endIdx,
     List<double> real, {
     int? timePeriod,
     double? nbDevUp,
@@ -90,6 +88,8 @@ class TaLib {
       for (var i = 0; i < real.length; i++) {
         inReal[i] = real[i];
       }
+      final startIdx = 0;
+      final endIdx = real.length - 1;
       final outBegIdx = arena<Int32>(1);
       final outNBElement = arena<Int32>(1);
       final outRealUpperBand = arena<Double>(endIdx - startIdx + 1);
@@ -121,8 +121,6 @@ class TaLib {
 
   /// All Moving Average
   List<double> ma(
-    int startIdx,
-    int endIdx,
     List<double> real, {
     int? timePeriod,
     MaType maType = MaType.sma,
@@ -132,6 +130,8 @@ class TaLib {
       for (var i = 0; i < real.length; i++) {
         inReal[i] = real[i];
       }
+      final startIdx = 0;
+      final endIdx = real.length - 1;
       final outBegIdx = arena<Int32>(1);
       final outNBElement = arena<Int32>(1);
       final outReal = arena<Double>(endIdx - startIdx + 1);
@@ -152,8 +152,6 @@ class TaLib {
   }
 
   ({List<double> macd, List<double> macdSignal, List<double> macdHist}) macd(
-    int startIdx,
-    int endIdx,
     List<double> real, {
     int? fastPeriod,
     int? slowPeriod,
@@ -164,6 +162,8 @@ class TaLib {
       for (var i = 0; i < real.length; i++) {
         inReal[i] = real[i];
       }
+      final startIdx = 0;
+      final endIdx = real.length - 1;
       final outBegIdx = arena<Int32>(1);
       final outNBElement = arena<Int32>(1);
       final outMACD = arena<Double>(endIdx - startIdx + 1);
