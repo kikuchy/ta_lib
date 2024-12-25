@@ -8,9 +8,9 @@
 - [ ] APO	Absolute Price Oscillator
 - [ ] AROON	Aroon
 - [ ] AROONOSC	Aroon Oscillator
-- [ ] ATR	Average True Range
+- [x] ATR	Average True Range
 - [ ] AVGPRICE	Average Price
-- [ ] BBANDS	Bollinger Bands
+- [x] BBANDS	Bollinger Bands
 - [ ] BETA	Beta
 - [ ] BOP	Balance Of Power
 - [ ] CCI	Commodity Channel Index

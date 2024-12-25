@@ -6,9 +6,14 @@ import 'package:path/path.dart' as path;
 import 'package:ta_lib/src/generated_bindings.dart';
 
 class TaLib {
+  static TaLib? _instance;
   late final NativeLibrary _nativeBindings;
 
-  TaLib() {
+  factory TaLib() {
+    return TaLib._instance ??= TaLib._();
+  }
+
+  TaLib._() {
     var libraryPath =
         path.join(Directory.current.path, 'ta-lib', 'libta-lib.0.6.0.so');
     if (Platform.isMacOS) {
@@ -21,6 +26,97 @@ class TaLib {
     final dylib = DynamicLibrary.open(libraryPath);
     _nativeBindings = NativeLibrary(dylib);
     _nativeBindings.TA_Initialize();
+  }
+
+  /// Average True Range
+  List<double> atr(
+    int startIdx,
+    int endIdx,
+    List<double> high,
+    List<double> low,
+    List<double> close, {
+    int? timePeriod,
+  }) {
+    return using((arena) {
+      final inHigh = arena<Double>(high.length);
+      for (var i = 0; i < high.length; i++) {
+        inHigh[i] = high[i];
+      }
+
+      final inLow = arena<Double>(low.length);
+      for (var i = 0; i < low.length; i++) {
+        inLow[i] = low[i];
+      }
+
+      final inClose = arena<Double>(close.length);
+      for (var i = 0; i < close.length; i++) {
+        inClose[i] = close[i];
+      }
+
+      final outBegIdx = arena<Int32>(1);
+      final outNBElement = arena<Int32>(1);
+      final outReal = arena<Double>(endIdx - startIdx + 1);
+      final retCode = _nativeBindings.TA_ATR(
+        startIdx,
+        endIdx,
+        inHigh,
+        inLow,
+        inClose,
+        timePeriod ?? TA_INTEGER_DEFAULT,
+        outBegIdx,
+        outNBElement,
+        outReal,
+      );
+      if (retCode != TA_RetCode.TA_SUCCESS) {
+        throw TaLibException(retCode);
+      }
+      return outReal.asTypedList(outNBElement.value).toList();
+    }, malloc);
+  }
+
+  // Bollinger Bands
+  ({List<double> upperBand, List<double> middleBand, List<double> lowerBand})
+      bbands(
+    int startIdx,
+    int endIdx,
+    List<double> real, {
+    int? timePeriod,
+    double? nbDevUp,
+    double? nbDevDn,
+    MaType maType = MaType.sma,
+  }) {
+    return using((arena) {
+      final inReal = arena<Double>(real.length);
+      for (var i = 0; i < real.length; i++) {
+        inReal[i] = real[i];
+      }
+      final outBegIdx = arena<Int32>(1);
+      final outNBElement = arena<Int32>(1);
+      final outRealUpperBand = arena<Double>(endIdx - startIdx + 1);
+      final outRealMiddleBand = arena<Double>(endIdx - startIdx + 1);
+      final outRealLowerBand = arena<Double>(endIdx - startIdx + 1);
+      final retCode = _nativeBindings.TA_BBANDS(
+          startIdx,
+          endIdx,
+          inReal,
+          timePeriod ?? TA_INTEGER_DEFAULT,
+          nbDevUp ?? TA_REAL_DEFAULT,
+          nbDevDn ?? TA_REAL_DEFAULT,
+          maType.toNative(),
+          outBegIdx,
+          outNBElement,
+          outRealUpperBand,
+          outRealMiddleBand,
+          outRealLowerBand);
+      if (retCode != TA_RetCode.TA_SUCCESS) {
+        throw TaLibException(retCode);
+      }
+      return (
+        upperBand: outRealUpperBand.asTypedList(outNBElement.value).toList(),
+        middleBand: outRealMiddleBand.asTypedList(outNBElement.value).toList(),
+        lowerBand: outRealLowerBand.asTypedList(outNBElement.value).toList(),
+      );
+    }, malloc);
   }
 
   /// All Moving Average
