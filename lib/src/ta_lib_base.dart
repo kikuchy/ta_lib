@@ -15,13 +15,13 @@ class TaLib {
 
   TaLib._() {
     var libraryPath =
-        path.join(Directory.current.path, 'ta-lib', 'libta-lib.0.6.0.so');
+        path.join(Directory.current.path, 'ta-lib', 'libta-lib.0.6.3.so');
     if (Platform.isMacOS) {
       libraryPath =
-          path.join(Directory.current.path, 'ta-lib', 'libta-lib.0.6.0.dylib');
+          path.join(Directory.current.path, 'ta-lib', 'libta-lib.0.6.3.dylib');
     } else if (Platform.isWindows) {
       libraryPath = path.join(
-          Directory.current.path, 'ta-lib', 'Debug', 'ta-lib.0.6.0.dll');
+          Directory.current.path, 'ta-lib', 'Debug', 'ta-lib.0.6.3.dll');
     }
     final dylib = DynamicLibrary.open(libraryPath);
     _nativeBindings = NativeLibrary(dylib);

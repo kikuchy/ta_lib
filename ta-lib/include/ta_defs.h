@@ -48,7 +48,7 @@
     /* Int32, UInt32, Int64 and UInt64 are built-in for .NET */
     #define INT_MIN (Int32::MinValue)
     #define INT_MAX (Int32::MaxValue)
-  #elif defined( _JAVA )
+  #elif defined( _JAVA ) || defined( _RUST )
     #define INT_MIN Integer.MIN_VALUE
     #define INT_MAX Integer.MAX_VALUE
   #else
@@ -102,11 +102,6 @@
  */
 #if defined( _MANAGED )
 
-  /* CMJ is the "CManagedJava" macro. It allows to write variant
-   * for the 3 different languages.
-   */
-  #define CMJ(c,managed,java) managed
-
   /* Enumeration abstraction */
   #define ENUM_BEGIN(w) enum class w {
   #define ENUM_DEFINE(x,y) y
@@ -135,8 +130,7 @@
 
   #define TA_LIB_API
 
-#elif defined( _JAVA )
-  #define CMJ(c,managed,java) java
+#elif defined( _JAVA ) || defined( _RUST )
 
   #define ENUM_BEGIN(w) public enum w {
   #define ENUM_DEFINE(x,y) y
@@ -163,8 +157,6 @@
   #define TA_LIB_API
 
 #else
-
-  #define CMJ(c,managed,java) c
 
   #define ENUM_BEGIN(w) typedef enum {
   #define ENUM_DEFINE(x,y) x

@@ -21,3 +21,4 @@ ffigen:
   headers:
     entry-points:
       - 'ta-lib/include/ta_func.h'
+  silence-enum-warning: true

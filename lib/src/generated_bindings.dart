@@ -1591,25 +1591,15 @@ class NativeLibrary {
   late final _TA_GetVersionMinor =
       _TA_GetVersionMinorPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  ffi.Pointer<ffi.Char> TA_GetVersionBuild() {
-    return _TA_GetVersionBuild();
+  ffi.Pointer<ffi.Char> TA_GetVersionPatch() {
+    return _TA_GetVersionPatch();
   }
 
-  late final _TA_GetVersionBuildPtr =
+  late final _TA_GetVersionPatchPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
-          'TA_GetVersionBuild');
-  late final _TA_GetVersionBuild =
-      _TA_GetVersionBuildPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
-
-  ffi.Pointer<ffi.Char> TA_GetVersionExtra() {
-    return _TA_GetVersionExtra();
-  }
-
-  late final _TA_GetVersionExtraPtr =
-      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
-          'TA_GetVersionExtra');
-  late final _TA_GetVersionExtra =
-      _TA_GetVersionExtraPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
+          'TA_GetVersionPatch');
+  late final _TA_GetVersionPatch =
+      _TA_GetVersionPatchPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
   ffi.Pointer<ffi.Char> TA_GetVersionDate() {
     return _TA_GetVersionDate();
@@ -1630,6 +1620,26 @@ class NativeLibrary {
           'TA_GetVersionTime');
   late final _TA_GetVersionTime =
       _TA_GetVersionTimePtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
+
+  ffi.Pointer<ffi.Char> TA_GetVersionBuild() {
+    return _TA_GetVersionBuild();
+  }
+
+  late final _TA_GetVersionBuildPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'TA_GetVersionBuild');
+  late final _TA_GetVersionBuild =
+      _TA_GetVersionBuildPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
+
+  ffi.Pointer<ffi.Char> TA_GetVersionExtra() {
+    return _TA_GetVersionExtra();
+  }
+
+  late final _TA_GetVersionExtraPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Char> Function()>>(
+          'TA_GetVersionExtra');
+  late final _TA_GetVersionExtra =
+      _TA_GetVersionExtraPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
   void TA_SetRetCodeInfo(
     TA_RetCode theRetCode,
@@ -18517,6 +18527,8 @@ const int __MAC_15_0 = 150000;
 
 const int __MAC_15_1 = 150100;
 
+const int __MAC_15_2 = 150200;
+
 const int __IPHONE_2_0 = 20000;
 
 const int __IPHONE_2_1 = 20100;
@@ -18679,6 +18691,8 @@ const int __IPHONE_18_0 = 180000;
 
 const int __IPHONE_18_1 = 180100;
 
+const int __IPHONE_18_2 = 180200;
+
 const int __WATCHOS_1_0 = 10000;
 
 const int __WATCHOS_2_0 = 20000;
@@ -18776,6 +18790,8 @@ const int __WATCHOS_10_5 = 100500;
 const int __WATCHOS_11_0 = 110000;
 
 const int __WATCHOS_11_1 = 110100;
+
+const int __WATCHOS_11_2 = 110200;
 
 const int __TVOS_9_0 = 90000;
 
@@ -18877,6 +18893,8 @@ const int __TVOS_18_0 = 180000;
 
 const int __TVOS_18_1 = 180100;
 
+const int __TVOS_18_2 = 180200;
+
 const int __BRIDGEOS_2_0 = 20000;
 
 const int __BRIDGEOS_3_0 = 30000;
@@ -18933,6 +18951,8 @@ const int __BRIDGEOS_9_0 = 90000;
 
 const int __BRIDGEOS_9_1 = 90100;
 
+const int __BRIDGEOS_9_2 = 90200;
+
 const int __DRIVERKIT_19_0 = 190000;
 
 const int __DRIVERKIT_20_0 = 200000;
@@ -18963,6 +18983,8 @@ const int __DRIVERKIT_24_0 = 240000;
 
 const int __DRIVERKIT_24_1 = 240100;
 
+const int __DRIVERKIT_24_2 = 240200;
+
 const int __VISIONOS_1_0 = 10000;
 
 const int __VISIONOS_1_1 = 10100;
@@ -18972,6 +18994,8 @@ const int __VISIONOS_1_2 = 10200;
 const int __VISIONOS_2_0 = 20000;
 
 const int __VISIONOS_2_1 = 20100;
+
+const int __VISIONOS_2_2 = 20200;
 
 const int MAC_OS_X_VERSION_10_0 = 1000;
 
@@ -19099,9 +19123,11 @@ const int MAC_OS_VERSION_15_0 = 150000;
 
 const int MAC_OS_VERSION_15_1 = 150100;
 
+const int MAC_OS_VERSION_15_2 = 150200;
+
 const int __MAC_OS_X_VERSION_MIN_REQUIRED = 140000;
 
-const int __MAC_OS_X_VERSION_MAX_ALLOWED = 150100;
+const int __MAC_OS_X_VERSION_MAX_ALLOWED = 150200;
 
 const int __ENABLE_LEGACY_MAC_AVAILABILITY = 1;
 
