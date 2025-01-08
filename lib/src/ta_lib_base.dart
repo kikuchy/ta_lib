@@ -194,6 +194,37 @@ class TaLib {
     });
   }
 
+  /// Relative Strength Index
+  List<double> rsi(
+    List<double> real, {
+    int? timePeriod,
+  }) {
+    return using((arena) {
+      final inReal = arena<Double>(real.length);
+      for (var i = 0; i < real.length; i++) {
+        inReal[i] = real[i];
+      }
+      final startIdx = 0;
+      final endIdx = real.length - 1;
+      final outBegIdx = arena<Int32>(1);
+      final outNBElement = arena<Int32>(1);
+      final outReal = arena<Double>(endIdx - startIdx + 1);
+      final retCode = _nativeBindings.TA_RSI(
+        startIdx,
+        endIdx,
+        inReal,
+        timePeriod ?? TA_INTEGER_DEFAULT,
+        outBegIdx,
+        outNBElement,
+        outReal,
+      );
+      if (retCode != TA_RetCode.TA_SUCCESS) {
+        throw TaLibException(retCode);
+      }
+      return outReal.asTypedList(outNBElement.value).toList();
+    });
+  }
+
   List<double> trange(
     List<double> high,
     List<double> low,
