@@ -17,7 +17,7 @@ Dart wrapper of [TA-Lib](https://ta-lib.org/).
 
 This package is not yet stable.
 
-Almost all functions are implemented. See [Roadmap](Roadmap.md).
+Almost all functions are not implemented. See [Roadmap](Roadmap.md).
 
 ## Getting started
 
