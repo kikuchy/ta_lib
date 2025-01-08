@@ -20,8 +20,8 @@ class TaLib {
       libraryPath =
           path.join(Directory.current.path, 'ta-lib', 'libta-lib.0.6.3.dylib');
     } else if (Platform.isWindows) {
-      libraryPath = path.join(
-          Directory.current.path, 'ta-lib', 'Debug', 'ta-lib.0.6.3.dll');
+      libraryPath =
+          path.join(Directory.current.path, 'ta-lib', 'ta-lib.x86_32.0.6.3.dll');
     }
     final dylib = DynamicLibrary.open(libraryPath);
     _nativeBindings = NativeLibrary(dylib);

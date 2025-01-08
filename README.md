@@ -27,7 +27,7 @@ dart pub add ta_lib
 
 ### Warning
 
-Windows and Linux users need to build the ta-lib library from source and put
+Linux users need to copy pre-compiled so file or build the ta-lib library from source, and put
 the binary file in the `ta-lib` directory.
 
 ## Usage
