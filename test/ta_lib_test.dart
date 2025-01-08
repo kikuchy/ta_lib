@@ -102,6 +102,11 @@ void main() {
       );
     });
 
+    test('BOP', () {
+      expect(taLib.bop([1.0353], [1.03548], [1.03522], [1.03534]),
+          [0.1538461538454969]);
+    });
+
     test('MA', () {
       expect(taLib.ma([1, 2, 3, 4, 5], maType: MaType.sma, timePeriod: 3),
           [2, 3, 4]);

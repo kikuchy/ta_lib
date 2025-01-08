@@ -12,7 +12,7 @@
 - [ ] AVGPRICE	Average Price
 - [x] BBANDS	Bollinger Bands
 - [ ] BETA	Beta
-- [ ] BOP	Balance Of Power
+- [x] BOP	Balance Of Power
 - [ ] CCI	Commodity Channel Index
 - [ ] CDL2CROWS	Two Crows
 - [ ] CDL3BLACKCROWS	Three Black Crows

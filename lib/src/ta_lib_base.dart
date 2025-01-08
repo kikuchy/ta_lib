@@ -119,6 +119,56 @@ class TaLib {
     }, malloc);
   }
 
+  /// Balance Of Power
+  List<double> bop(
+    List<double> open,
+    List<double> high,
+    List<double> low,
+    List<double> close,
+  ) {
+    return using((arena) {
+      final inOpen = arena<Double>(open.length);
+      for (var i = 0; i < open.length; i++) {
+        inOpen[i] = open[i];
+      }
+
+      final inHigh = arena<Double>(high.length);
+      for (var i = 0; i < high.length; i++) {
+        inHigh[i] = high[i];
+      }
+
+      final inLow = arena<Double>(low.length);
+      for (var i = 0; i < low.length; i++) {
+        inLow[i] = low[i];
+      }
+
+      final inClose = arena<Double>(close.length);
+      for (var i = 0; i < close.length; i++) {
+        inClose[i] = close[i];
+      }
+      final startIdx = 0;
+      final endIdx = close.length - 1;
+      final outBegIdx = arena<Int32>(1);
+      final outNBElement = arena<Int32>(1);
+      final outReal = arena<Double>(endIdx - startIdx + 1);
+      final retCode = _nativeBindings.TA_BOP(
+        startIdx,
+        endIdx,
+        inOpen,
+        inHigh,
+        inLow,
+        inClose,
+        outBegIdx,
+        outNBElement,
+        outReal,
+      );
+      if (retCode != TA_RetCode.TA_SUCCESS) {
+        throw TaLibException(retCode);
+      }
+      return outReal.asTypedList(outNBElement.value).toList();
+    });
+  }
+
   /// All Moving Average
   List<double> ma(
     List<double> real, {
